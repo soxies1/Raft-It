@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -19,12 +17,10 @@ public class Player1Movement : MonoBehaviour {
     private int bounce = 0;
     private Vector3 bounceAngle;
 
-// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 	}
 
-// Update is called once per frame
 	void Update () {
 
 	    if (transform.position.x < -12)

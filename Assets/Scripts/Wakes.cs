@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Wakes : MonoBehaviour {
@@ -8,7 +7,6 @@ public class Wakes : MonoBehaviour {
 
 	private Vector3 wakeSize, transformSize;
 	
-	// Use this for initialization
 	void Start () {
 
 		transformSize = GetComponent<SpriteRenderer>().bounds.size;

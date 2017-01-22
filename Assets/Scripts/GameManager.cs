@@ -92,13 +92,13 @@ public class GameManager : MonoBehaviour {
         Instantiate(objectToSpawn, spawnPos, Quaternion.identity);
 	}
 
-	public void Player1Scores(){
-		Player1Score++;
+	public void Player1Scores(int point){
+		Player1Score += point;
 		UpdateText();
 	}
 
-	public void Player2Scores(){
-		Player2Score++;
+	public void Player2Scores(int point){
+		Player2Score += point;
 		UpdateText();
 	}
 

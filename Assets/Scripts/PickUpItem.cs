@@ -25,11 +25,17 @@ public class PickUpItem : MonoBehaviour {
 		if(holdingItem && collision.gameObject.tag == "StorageCrate"){
 			
 			if(collision.gameObject.name == "StorageCrate1"){
-				print("player1 scores");
-				GameManager.Instance.Player1Scores();
+				if(!itemHeld.gameObject.name.Contains("Stone")){
+					GameManager.Instance.Player1Scores(1);
+				}else{
+					GameManager.Instance.Player1Scores(-1);
+				}
 			}else{
-				print("player2 scores");
-				GameManager.Instance.Player2Scores();
+				if(!itemHeld.gameObject.name.Contains("Stone")){
+					GameManager.Instance.Player2Scores(1);
+				}else{
+					GameManager.Instance.Player2Scores(-1);
+				}
 			}
 			print(clip);
 			if(clip != null){

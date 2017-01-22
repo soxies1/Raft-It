@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
+	void Update(){
+		if(Input.GetKey(KeyCode.Return)) PlayClicked();
+	}
 	public void PlayClicked(){
 		SceneManager.LoadScene(1);
 	}

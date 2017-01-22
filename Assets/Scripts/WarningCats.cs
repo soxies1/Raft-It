@@ -6,7 +6,7 @@ public class WarningCats : MonoBehaviour {
 	
 	public float speed;
 	public Transform pos;
-	// Update is called once per frame
+	
 	void Update () {
 		if(GameManager.Instance.warning){
 			if(transform.position.x > pos.position.x){

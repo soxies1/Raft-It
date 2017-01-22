@@ -28,8 +28,6 @@ public class WarningTexts : MonoBehaviour {
 			yield return new WaitForSeconds(.5f);
 			text.text = "";
 			yield return new WaitForSeconds(.3f);
-
-			
 		}
 	}
 }
