@@ -66,6 +66,9 @@ public class Player1Movement : MonoBehaviour {
 		}else{
 			movey = 0;
 		}
+	    movex *= 1.2f;
+	    movey *= 1.2f;
+
 	}
 
 	void FixedUpdate ()
