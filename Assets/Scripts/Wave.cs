@@ -88,5 +88,4 @@ public class Wave : MonoBehaviour
             surgeTime--;
         }
     }
-
 }
