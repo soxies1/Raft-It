@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour {
 
 	public Land land;
 
+    public static bool player1Lost;
+    public static bool player2Lost;
+
 	public static GameManager Instance{
 		get{
 			if(instance == null){
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour {
 	void Awake(){
 		if (instance == null){
 			instance = this;
+            DontDestroyOnLoad(transform.gameObject);
 		}else{
 			Destroy(gameObject);
 		}
@@ -63,9 +67,7 @@ public class GameManager : MonoBehaviour {
     IEnumerator CalculateSpawnArea()
     {
         float yPos = SpawnArea.transform.position.y;
-        float zPos = SpawnArea.transform.position.z;
         float yScale = SpawnArea.transform.localScale.y;
-        float zScale = SpawnArea.transform.localScale.z;
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
@@ -74,10 +76,7 @@ public class GameManager : MonoBehaviour {
             float distance = rightEdge - leftEdge;
 
             SpawnArea.transform.position = new Vector3(leftEdge + distance / 2, yPos);
-//            SpawnArea.GetComponent<SpriteRenderer>().bounds.size.x = distance;
-//            SpawnArea.transform.localScale = new Vector3(distance * 2,yScale,zScale);
             SpawnArea.transform.localScale = new Vector3(distance * 6, yScale);
-//            print("Scale" + distance);
         }
     }
 
@@ -94,12 +93,7 @@ public class GameManager : MonoBehaviour {
 	void SpawnObject(){
 		GameObject objectToSpawn = collectableItems[Random.Range(0, collectableItems.Length)];
 		Vector3 tileDimensions = SpawnArea.GetComponent<SpriteRenderer>().bounds.size;
-//		Vector3 tileDimensions = new Vector3(SpawnArea.transform.localScale.x, SpawnArea.transform.localScale.y);
-//	    tileDimensions.x += SpawnArea.transform.position.x;
-        print("x" + tileDimensions.x);
-//		Vector3 spawnPos = new Vector3(Random.Range(0f, tileDimensions.x) - tileDimensions.x/2, Random.Range(0, tileDimensions.y) - tileDimensions.y/2);
 		Vector3 spawnPos = new Vector3(Random.Range(0f, tileDimensions.x) + SpawnArea.transform.position.x, Random.Range(0, tileDimensions.y) - tileDimensions.y/2);
-//        SpawnArea.transform.position = new Vector3(wave.edge, transform.position.y, transform.position.z);
         Instantiate(objectToSpawn, spawnPos, Quaternion.identity);
 	}
 
@@ -117,4 +111,14 @@ public class GameManager : MonoBehaviour {
 		Player1ScoreText.text = Player1Score.ToString();
 		Player2ScoreText.text = Player2Score.ToString();
 	}
+
+    public void Player1Lost()
+    {
+        player1Lost = true;
+    }
+
+    public void Player2Lost()
+    {
+        player2Lost = true;
+    }
 }
