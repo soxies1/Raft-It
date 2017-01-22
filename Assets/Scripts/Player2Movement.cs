@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,20 +11,31 @@ public class Player2Movement : MonoBehaviour {
 	private float movey = 0f;
 
 	private Rigidbody2D rb;
+    private int bounce = 0;
+    private Vector3 bounceAngle;
 
-
-// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		rb = GetComponent<Rigidbody2D>();
 	}
 
-// Update is called once per frame
+	// Update is called once per frame
 	void Update () {
 
 	    if (transform.position.x < -12)
 	    {
 	        SceneManager.LoadScene("GameOver");
 	    }
+
+        if (bounce > 0)
+        {
+            movex = bounceAngle.x;
+            movey = bounceAngle.y;
+            bounce--;
+
+            return;
+        }
+
         if (GameManager.Instance.player2Lost)
         {
             movex = -1;
@@ -84,6 +96,23 @@ public class Player2Movement : MonoBehaviour {
             player2Loses();
             disableCollision();
         }
+
+        if (collision.gameObject.tag == "Player1")
+        {
+            bounce = 3;
+            bounceAngle = new Vector3(collision.contacts.First().point.x, collision.contacts.First().point.y);
+            bounceAngle = transform.position - bounceAngle;
+            bounceAngle = customNormalize(bounceAngle);
+        }
+
+    }
+
+    Vector3 customNormalize(Vector3 v)
+    {
+        float length = v.x * v.x + v.y * v.y;
+        v.x /= length;
+        v.y /= length;
+        return v;
     }
 
     bool isDocking(Collision2D collision)

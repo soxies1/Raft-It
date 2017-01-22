@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -30,6 +30,9 @@ public class Player1Movement : MonoBehaviour {
             SceneManager.LoadScene("GameOver");
         }
 
+<<<<<<< HEAD
+	    if (GameManager.Instance.player1Lost)
+=======
 	    if (bounce > 0)
 	    {
 	        movex = bounceAngle.x;
@@ -39,7 +42,8 @@ public class Player1Movement : MonoBehaviour {
 	        return;
 	    }
 
-	    if (GameManager.Instance.player1Lost)
+	    if (GameManager.player1Lost)
+>>>>>>> 410e991d3436a060edbafca3bfc78c7eba0ba99e
 	    {
 	        movex = -1;
 	        movey = 0;
