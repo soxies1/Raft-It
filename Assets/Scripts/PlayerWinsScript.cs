@@ -19,19 +19,27 @@ public class PlayerWinsScript : MonoBehaviour
     }
 
     public Text text;
+
+	public Text scoreText;
 	// Use this for initialization
 	void Start () {
 	    if (GameManager.Instance.player1Lost && GameManager.Instance.player2Lost)
 	    {
 	        text.text = "It's a Tie!!";
+
+			scoreText.text = "Both kittens got swept into the ocean!";
 	    }
 	    else if (GameManager.Instance.player2Lost)
 	    {
 	        text.text = "Jeff From The Overwatch Team Wins!!";
+
+			scoreText.text = "Paw-nzo was swept away!";
 	    }
 	    else if (GameManager.Instance.player1Lost)
 	    {
 	        text.text = "Paw-nzo Wins!!";
+
+			scoreText.text = "Jeff From The Overwatch Team was swept away!";
 	    }
 	    else
 	    {
@@ -44,11 +52,9 @@ public class PlayerWinsScript : MonoBehaviour
 	            text.text = "Paw-nzo Wins!!";
 	        }
 	        else text.text = "It's a Tie!!";
+
+			scoreText.text = (int.Parse(GameManager.Instance.Player1ScoreText.text) != 2 ? GameManager.Instance.Player1ScoreText.text : "Two") + " - " + (int.Parse(GameManager.Instance.Player2ScoreText.text) != 2 ? GameManager.Instance.Player2ScoreText.text : "Two");
 	    }
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

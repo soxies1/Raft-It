@@ -74,6 +74,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void SpawnObject(){
+		if(land == null){
+			return;
+		}
 		float rightEdge = land.getEdge();
 		float leftEdge = wave.edge;
 

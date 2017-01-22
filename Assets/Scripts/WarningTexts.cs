@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WarningTexts : MonoBehaviour {
 
-	string[] strings = { "Get Back!!", "Come here!", "It's dangerous!", "The shore is safe!"};
+	string[] strings = { "Get Back!!", "Come here!", "It's dangerous!", "The shore is safe!", "Nerf the water!!"};
 	// Use this for initialization
 
 	Text[] texts;
