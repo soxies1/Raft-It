@@ -62,6 +62,9 @@ public class Player1Movement : MonoBehaviour {
 		}else{
 			movey = 0;
 		}
+	    movex *= 1.2f;
+	    movey *= 1.2f;
+
 	}
 
 	void FixedUpdate ()
@@ -123,7 +126,7 @@ public class Player1Movement : MonoBehaviour {
 
     IEnumerator BounceText()
     {
-        string[] taunts = { "Wrestle with Jeff, Prepare for Death", "Get Ready For My Banhammer", "I Look Forward To Your Salty Tears", "Buy More Lootboxes" };
+        string[] taunts = { "Wrestle with Jeff, Prepare for Death", "Get Ready For My Banhammer", "I Look Forward To Your Salty Tears", "Buy More Lootboxes", "Don't make me nerf you" };
         int taunt = Random.Range(0, taunts.Length);
         overhead.GetComponentInChildren<Text>().text = taunts[taunt];
         yield return new WaitForSeconds(2);

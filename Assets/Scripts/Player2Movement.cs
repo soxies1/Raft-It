@@ -65,6 +65,8 @@ public class Player2Movement : MonoBehaviour {
 		}else{
 			movey = 0;
 		}
+	    movex *= 1.2f;
+	    movey *= 1.2f;
 	}
 
 	void FixedUpdate ()
@@ -126,7 +128,7 @@ public class Player2Movement : MonoBehaviour {
 
     IEnumerator BounceText()
     {
-        string[] taunts = {"I Do What I Must", "Never In Me-owt", "Never Second Pet", "Flow Like Catnip", "Remember this Meow-ment"};
+        string[] taunts = {"I Do What I Must", "Never In Me-owt", "Never Second Pet", "Flow Like Catnip", "Remember this Meow-ment" };
         int taunt = Random.Range(0, taunts.Length);
         overhead.GetComponentInChildren<Text>().text = taunts[taunt];
         yield return new WaitForSeconds(2);
