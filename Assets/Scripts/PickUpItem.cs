@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PickUpItem : MonoBehaviour {
 
 	private bool holdingItem = false;
 
 	private GameObject itemHeld;
+
+	AudioSource clip;
+
+	void Start(){
+		clip = GetComponent<AudioSource>();
+	}
 	
 	void OnCollisionEnter2D(Collision2D collision){
 		if(!holdingItem && collision.gameObject.tag == "Item"){
@@ -23,6 +30,10 @@ public class PickUpItem : MonoBehaviour {
 			}else{
 				print("player2 scores");
 				GameManager.Instance.Player2Scores();
+			}
+			print(clip);
+			if(clip != null){
+				clip.Play();
 			}
 
 			holdingItem = false;

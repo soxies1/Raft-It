@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour {
 		float distance = rightEdge - leftEdge;
 		float middle = leftEdge + distance/2;
 
-		if(distance <= 5.2f){
+		if(distance <= 6f){
 			warning = true;
 		}
 

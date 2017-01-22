@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player2Movement : MonoBehaviour {
 	public float Speed = 0f;
+
+    public Canvas overhead;
 	private float movex = 0f;
 	private float movey = 0f;
 
@@ -71,7 +74,7 @@ public class Player2Movement : MonoBehaviour {
     public void player2Loses()
     {
         GameManager.Instance.player2Lost = true;
-        print("collision");
+        overhead.GetComponentInChildren<Text>().text = "AAHHHHHHHH";
     }
 
     private void disableCollision()
@@ -86,7 +89,7 @@ public class Player2Movement : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isDocking(collision))
+        if (isDocking(collision) && GameManager.Instance.warning)
         {
             GameManager.Instance.player2Safe = true;
             disableCollision();
@@ -117,6 +120,6 @@ public class Player2Movement : MonoBehaviour {
 
     bool isDocking(Collision2D collision)
     {
-        return collision.gameObject.tag == "Dock2";
+        return collision.gameObject.tag == "Finish";
     }
 }

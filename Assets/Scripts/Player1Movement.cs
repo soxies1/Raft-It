@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player1Movement : MonoBehaviour {
 	public float Speed = 0f;
+
+    public Canvas overhead;
 	private float movex = 0f;
 	private float movey = 0f;
 
 	private Rigidbody2D rb;
 
-    public Wave wave;
     private int bounce = 0;
     private Vector3 bounceAngle;
 
@@ -74,6 +76,7 @@ public class Player1Movement : MonoBehaviour {
     public void player1Loses()
     {
         GameManager.Instance.player1Lost = true;
+        overhead.GetComponentInChildren<Text>().text = "AAHHHHHHHH";
     }
 
     private void disableCollision()
@@ -88,11 +91,10 @@ public class Player1Movement : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isDocking(collision))
+        if (isDocking(collision) && GameManager.Instance.warning)
         {
             GameManager.Instance.player1Safe = true;
             disableCollision();
-
         }
         if (collision.gameObject.tag == "Waves" && !GameManager.Instance.player1Safe)
         {
@@ -119,6 +121,6 @@ public class Player1Movement : MonoBehaviour {
 
     bool isDocking(Collision2D collision)
     {
-        return collision.gameObject.tag == "Dock1";
+        return collision.gameObject.tag == "Finish";
     }
 }
