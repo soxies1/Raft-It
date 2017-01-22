@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Wave : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Wave : MonoBehaviour
     public bool waveStop = false;
 
     public GameObject StartPos;
+    public GameObject End;
 
 	// Use this for initialization
 	void Start ()
@@ -78,6 +80,7 @@ public class Wave : MonoBehaviour
 	    count += 0.05;
 
 	    edge = transform.position.x + width;
+        if (edge > End.transform.position.x) SceneManager.LoadScene("GameOver");
 	}
 
     IEnumerator WaveTiming()
@@ -88,4 +91,5 @@ public class Wave : MonoBehaviour
             surgeTime--;
         }
     }
+
 }

@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour {
 
     public static bool player1Lost;
     public static bool player2Lost;
+    public static bool player1Safe;
+    public static bool player2Safe;
 
 	public static GameManager Instance{
 		get{
@@ -81,7 +83,7 @@ public class GameManager : MonoBehaviour {
     }
 
 	IEnumerator SpawnObjects(){
-		float spawn = 4f;
+		float spawn = 3f;
 		while(true){
 			yield return new WaitForSeconds(spawn);
 			spawn += .05f;
@@ -111,14 +113,4 @@ public class GameManager : MonoBehaviour {
 		Player1ScoreText.text = Player1Score.ToString();
 		Player2ScoreText.text = Player2Score.ToString();
 	}
-
-    public void Player1Lost()
-    {
-        player1Lost = true;
-    }
-
-    public void Player2Lost()
-    {
-        player2Lost = true;
-    }
 }

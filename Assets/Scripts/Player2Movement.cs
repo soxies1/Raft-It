@@ -27,8 +27,15 @@ public class Player2Movement : MonoBehaviour {
         if (GameManager.player2Lost)
         {
             movex = -1;
+            movey = 0;
             return;
         }
+	    if (GameManager.player2Safe)
+	    {
+	        movex = 0;
+	        movey = 0;
+	        return;
+	    }
 
         if (Input.GetKey (KeyCode.LeftArrow))
 			movex = -1;
@@ -55,13 +62,32 @@ public class Player2Movement : MonoBehaviour {
         print("collision");
     }
 
+    private void disableCollision()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        var Components = GetComponentsInChildren<Collider2D>();
+        foreach (var component in Components)
+        {
+            component.enabled = false;
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (collision.gameObject.tag == "Waves")
+        if (isDocking(collision))
+        {
+            GameManager.player2Safe = true;
+            disableCollision();
+        }
+        if (collision.gameObject.tag == "Waves" && !GameManager.player1Safe)
         {
             player2Loses();
-            GetComponent<Collider2D>().enabled = false;
+            disableCollision();
         }
+    }
+
+    bool isDocking(Collision2D collision)
+    {
+        return collision.gameObject.tag == "Dock2";
     }
 }

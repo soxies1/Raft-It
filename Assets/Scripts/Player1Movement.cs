@@ -29,6 +29,13 @@ public class Player1Movement : MonoBehaviour {
 	    if (GameManager.player1Lost)
 	    {
 	        movex = -1;
+	        movey = 0;
+	        return;
+	    }
+	    if (GameManager.player1Safe)
+	    {
+	        movex = 0;
+	        movey = 0;
 	        return;
 	    }
 		if (Input.GetKey (KeyCode.A))
@@ -54,16 +61,35 @@ public class Player1Movement : MonoBehaviour {
     public void player1Loses()
     {
         GameManager.player1Lost = true;
-        print("collision");
+    }
+
+    private void disableCollision()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        var Components = GetComponentsInChildren<Collider2D>();
+        foreach (var component in Components)
+        {
+            component.enabled = false;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (isDocking(collision))
+        {
+            GameManager.player1Safe = true;
+            disableCollision();
 
-        if (collision.gameObject.tag == "Waves")
+        }
+        if (collision.gameObject.tag == "Waves" && !GameManager.player1Safe)
         {
             player1Loses();
-            GetComponent<Collider2D>().enabled = false;
+            disableCollision();
         }
+    }
+
+    bool isDocking(Collision2D collision)
+    {
+        return collision.gameObject.tag == "Dock1";
     }
 }
