@@ -71,6 +71,12 @@ public class Player2Movement : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
+        if(movex > 0){
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if(movex < 0){
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
 		rb.velocity = new Vector2 (movex * Speed, movey * Speed);
 	}
     public void player2Loses()
