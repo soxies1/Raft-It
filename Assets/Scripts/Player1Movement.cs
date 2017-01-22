@@ -34,8 +34,8 @@ public class Player1Movement : MonoBehaviour {
 
 	    if (bounce > 0)
 	    {
-	        movex = bounceAngle.x;
-	        movey = bounceAngle.y;
+	        movex = bounceAngle.x * 1.5f;
+	        movey = bounceAngle.y * 1.5f;
             bounce--;
 
 	        return;
@@ -108,6 +108,7 @@ public class Player1Movement : MonoBehaviour {
             bounceAngle = new Vector3(collision.contacts.First().point.x, collision.contacts.First().point.y);
             bounceAngle = transform.position - bounceAngle;
             bounceAngle = customNormalize(bounceAngle);
+            StartCoroutine(BounceText());
         }
     }
 
@@ -122,5 +123,17 @@ public class Player1Movement : MonoBehaviour {
     bool isDocking(Collision2D collision)
     {
         return collision.gameObject.tag == "Finish";
+    }
+
+    IEnumerator BounceText()
+    {
+        string[] taunts = { "Wrestle with Jeff, Prepare for Death", "Get Ready For My Banhammer", "I Look Forward To Your Salty Tears", "Buy More Lootboxes" };
+        int taunt = Random.Range(0, taunts.Length);
+        overhead.GetComponentInChildren<Text>().text = taunts[taunt];
+        yield return new WaitForSeconds(2);
+        if (overhead.GetComponentInChildren<Text>().text == taunts[taunt])
+        {
+            overhead.GetComponentInChildren<Text>().text = "Jeff From The Overwatch Team";
+        }
     }
 }

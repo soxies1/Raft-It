@@ -32,8 +32,8 @@ public class Player2Movement : MonoBehaviour {
 
         if (bounce > 0)
         {
-            movex = bounceAngle.x;
-            movey = bounceAngle.y;
+            movex = bounceAngle.x * 1.5f;
+            movey = bounceAngle.y * 1.5f;
             bounce--;
 
             return;
@@ -106,6 +106,7 @@ public class Player2Movement : MonoBehaviour {
             bounceAngle = new Vector3(collision.contacts.First().point.x, collision.contacts.First().point.y);
             bounceAngle = transform.position - bounceAngle;
             bounceAngle = customNormalize(bounceAngle);
+            StartCoroutine(BounceText());
         }
 
     }
@@ -121,5 +122,17 @@ public class Player2Movement : MonoBehaviour {
     bool isDocking(Collision2D collision)
     {
         return collision.gameObject.tag == "Finish";
+    }
+
+    IEnumerator BounceText()
+    {
+        string[] taunts = {"I Do What I Must", "Never In Me-owt", "Never Second Pet", "Flow Like Catnip", "Remember this Meow-ment"};
+        int taunt = Random.Range(0, taunts.Length);
+        overhead.GetComponentInChildren<Text>().text = taunts[taunt];
+        yield return new WaitForSeconds(2);
+        if (overhead.GetComponentInChildren<Text>().text == taunts[taunt])
+        {
+            overhead.GetComponentInChildren<Text>().text = "Paw-nzo";
+        }
     }
 }
