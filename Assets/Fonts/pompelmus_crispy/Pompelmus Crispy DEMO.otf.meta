@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0004cc223dce54f5eb4790886b4d07c5
+timeCreated: 1485055352
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Pompelmus Crispy DEMO
+  fontNames:
+  - Pompelmus Crispy DEMO
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

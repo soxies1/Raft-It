@@ -21,27 +21,27 @@ public class PlayerWinsScript : MonoBehaviour
     public Text text;
 	// Use this for initialization
 	void Start () {
-	    if (GameManager.player1Lost && GameManager.player2Lost)
+	    if (GameManager.Instance.player1Lost && GameManager.Instance.player2Lost)
 	    {
 	        text.text = "It's a Tie!!";
 	    }
-	    else if (GameManager.player2Lost)
+	    else if (GameManager.Instance.player2Lost)
 	    {
-	        text.text = "Player 1 Wins!!";
+	        text.text = "Jeff From The Overwatch Team Wins!!";
 	    }
-	    else if (GameManager.player1Lost)
+	    else if (GameManager.Instance.player1Lost)
 	    {
-	        text.text = "Player 2 Wins!!";
+	        text.text = "Paw-nzo Wins!!";
 	    }
 	    else
 	    {
 	        if (player1ScoreHigher())
 	        {
-	            text.text = "Player 1 Wins!!";
+	            text.text = "Jeff From The Overwatch Team Wins!!";
 	        }
 	        else if (player2ScoreHigher())
 	        {
-	            text.text = "Player 2 Wins!!";
+	            text.text = "Paw-nzo Wins!!";
 	        }
 	        else text.text = "It's a Tie!!";
 	    }

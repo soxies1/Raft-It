@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour {
 
 	private int Player1Score, Player2Score;
 
-	private GameObject SpawnArea;
-
 	public GameObject Player1Prefab, Player2Prefab;
 
 	public Transform Player1Spawn, Player2Spawn;
@@ -28,10 +26,12 @@ public class GameManager : MonoBehaviour {
 
 	public Land land;
 
-    public static bool player1Lost;
-    public static bool player2Lost;
-    public static bool player1Safe;
-    public static bool player2Safe;
+    public bool player1Lost;
+    public bool player2Lost;
+    public bool player1Safe;
+    public bool player2Safe;
+
+	public bool warning = false;
 
 	public static GameManager Instance{
 		get{
@@ -56,9 +56,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start(){
-		SpawnArea = GameObject.FindGameObjectWithTag("SpawnArea");
 		StartCoroutine("SpawnObjects");
-	    StartCoroutine("CalculateSpawnArea");
 		Player1Score = Player2Score = 0;
 		UpdateText();
 
@@ -66,36 +64,28 @@ public class GameManager : MonoBehaviour {
 		Instantiate(Player2Prefab, Player2Spawn.position, Quaternion.identity);
 	}
 
-    IEnumerator CalculateSpawnArea()
-    {
-        float yPos = SpawnArea.transform.position.y;
-        float yScale = SpawnArea.transform.localScale.y;
-        while (true)
-        {
-            yield return new WaitForSeconds(0.1f);
-            float rightEdge = land.getEdge();
-            float leftEdge = wave.edge;
-            float distance = rightEdge - leftEdge;
-
-            SpawnArea.transform.position = new Vector3(leftEdge + distance / 2, yPos);
-            SpawnArea.transform.localScale = new Vector3(distance * 6, yScale);
-        }
-    }
-
 	IEnumerator SpawnObjects(){
-		float spawn = 3f;
+		float spawn = 2.1f;
 		while(true){
 			yield return new WaitForSeconds(spawn);
-			spawn += .05f;
+			spawn += .1f;
 			SpawnObject();
-		    
 		}
 	}
 
 	void SpawnObject(){
+		float rightEdge = land.getEdge();
+		float leftEdge = wave.edge;
+
+		float distance = rightEdge - leftEdge;
+		float middle = leftEdge + distance/2;
+
+		if(distance <= 5.2f){
+			warning = true;
+		}
+
 		GameObject objectToSpawn = collectableItems[Random.Range(0, collectableItems.Length)];
-		Vector3 tileDimensions = SpawnArea.GetComponent<SpriteRenderer>().bounds.size;
-		Vector3 spawnPos = new Vector3(Random.Range(0f, tileDimensions.x) + SpawnArea.transform.position.x, Random.Range(0, tileDimensions.y) - tileDimensions.y/2);
+		Vector3 spawnPos = new Vector3(Random.Range(leftEdge, rightEdge), Random.Range(-4.5f, 4.5f));
         Instantiate(objectToSpawn, spawnPos, Quaternion.identity);
 	}
 

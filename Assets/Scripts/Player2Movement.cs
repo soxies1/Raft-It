@@ -24,13 +24,13 @@ public class Player2Movement : MonoBehaviour {
 	    {
 	        SceneManager.LoadScene("GameOver");
 	    }
-        if (GameManager.player2Lost)
+        if (GameManager.Instance.player2Lost)
         {
             movex = -1;
             movey = 0;
             return;
         }
-	    if (GameManager.player2Safe)
+	    if (GameManager.Instance.player2Safe)
 	    {
 	        movex = 0;
 	        movey = 0;
@@ -58,7 +58,7 @@ public class Player2Movement : MonoBehaviour {
 	}
     public void player2Loses()
     {
-        GameManager.player2Lost = true;
+        GameManager.Instance.player2Lost = true;
         print("collision");
     }
 
@@ -76,10 +76,10 @@ public class Player2Movement : MonoBehaviour {
     {
         if (isDocking(collision))
         {
-            GameManager.player2Safe = true;
+            GameManager.Instance.player2Safe = true;
             disableCollision();
         }
-        if (collision.gameObject.tag == "Waves" && !GameManager.player1Safe)
+        if (collision.gameObject.tag == "Waves" && !GameManager.Instance.player1Safe)
         {
             player2Loses();
             disableCollision();

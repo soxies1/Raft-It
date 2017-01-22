@@ -12,6 +12,7 @@ public class EndGame : MonoBehaviour {
 
 	IEnumerator RestartGame(){
 		yield return new WaitForSeconds(5f);
+		Destroy(GameManager.Instance);
 		SceneManager.LoadScene(0);
 	}
 	
