@@ -1,6 +1,8 @@
 # Raft-It
 Unity Game for Global Game Jam 2017 - Involves gathering parts for a raft to prepare for the flooding of the world.
 
+Playable at: http://tysonbulmer.ca/unity/raftit/index.html
+
 Made by Tim Chan and Tyson Bulmer in under 48 hours
 
 ## Objective
